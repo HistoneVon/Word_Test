@@ -6,16 +6,453 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1023</width>
+    <height>582</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>CET-6单词测试</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
-  <widget class="QMenuBar" name="menubar"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="9,1">
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>答题卡</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_6">
+               <item>
+                <widget class="QLabel" name="label_question">
+                 <property name="font">
+                  <font>
+                   <family>等线</family>
+                   <pointsize>26</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>Q</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_answer">
+                 <property name="font">
+                  <font>
+                   <family>等线</family>
+                   <pointsize>26</pointsize>
+                   <weight>75</weight>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="text">
+                  <string>A</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QLineEdit" name="lineEdit">
+                 <property name="font">
+                  <font>
+                   <family>等线</family>
+                   <pointsize>20</pointsize>
+                   <weight>50</weight>
+                   <bold>false</bold>
+                  </font>
+                 </property>
+                 <property name="mouseTracking">
+                  <bool>true</bool>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
+                 <property name="placeholderText">
+                  <string>请先点击 导入文件 开始后此处将显示问题</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_2">
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_2">
+                   <property name="font">
+                    <font>
+                     <family>等线</family>
+                     <pointsize>20</pointsize>
+                     <weight>50</weight>
+                     <bold>false</bold>
+                    </font>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="placeholderText">
+                    <string>请在此输入答案</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_check">
+                   <property name="text">
+                    <string>提交</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>操作</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QPushButton" name="pushButton_import">
+             <property name="text">
+              <string>导入文件</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_start">
+             <property name="text">
+              <string>开始</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButton_end">
+             <property name="text">
+              <string>结束</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="title">
+         <string>单词本</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout" stretch="9,1">
+           <item>
+            <widget class="QTabWidget" name="tabWidgetWordpad">
+             <property name="tabPosition">
+              <enum>QTabWidget::West</enum>
+             </property>
+             <property name="currentIndex">
+              <number>0</number>
+             </property>
+             <widget class="QWidget" name="tab_1">
+              <attribute name="title">
+               <string>全部</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <item row="0" column="0">
+                <widget class="QTableWidget" name="tableWidget_1">
+                 <column>
+                  <property name="text">
+                   <string>英文</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>中文</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>正误</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>测试次数</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_2">
+              <attribute name="title">
+               <string>错题</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_4">
+               <item row="0" column="0">
+                <widget class="QTableWidget" name="tableWidget_2">
+                 <column>
+                  <property name="text">
+                   <string>英文</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>中文</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>正误</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>测试次数</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_3">
+              <attribute name="title">
+               <string>已答</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="0" column="0">
+                <widget class="QTableWidget" name="tableWidget_3">
+                 <column>
+                  <property name="text">
+                   <string>英文</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>中文</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>正误</string>
+                  </property>
+                 </column>
+                 <column>
+                  <property name="text">
+                   <string>测试次数</string>
+                  </property>
+                 </column>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="QPushButton" name="pushButton_delete">
+                 <property name="text">
+                  <string>删除</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_export_1">
+                 <property name="text">
+                  <string>导出错题</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_export_2">
+                 <property name="text">
+                  <string>导出已答</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1023</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>菜单</string>
+    </property>
+    <addaction name="actionImport"/>
+    <addaction name="separator"/>
+    <addaction name="actionWordpad"/>
+    <addaction name="actionWrongWords"/>
+    <addaction name="actionDoneWords"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>关于</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>动作</string>
+    </property>
+    <addaction name="actionStart"/>
+    <addaction name="actionEnd"/>
+    <addaction name="actionCheck"/>
+    <addaction name="separator"/>
+    <addaction name="actionExport"/>
+    <addaction name="actionDone"/>
+    <addaction name="actionDelete"/>
+    <addaction name="actionClear"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_2"/>
+  </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionImport"/>
+   <addaction name="actionExit"/>
+   <addaction name="separator"/>
+   <addaction name="actionStart"/>
+   <addaction name="actionEnd"/>
+   <addaction name="actionCheck"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar_2">
+   <property name="windowTitle">
+    <string>toolBar_2</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionWordpad"/>
+   <addaction name="actionWrongWords"/>
+   <addaction name="actionDoneWords"/>
+   <addaction name="separator"/>
+   <addaction name="actionExport"/>
+   <addaction name="actionDone"/>
+   <addaction name="actionDelete"/>
+  </widget>
+  <action name="actionImport">
+   <property name="text">
+    <string>导入文件</string>
+   </property>
+  </action>
+  <action name="actionStart">
+   <property name="text">
+    <string>开始</string>
+   </property>
+  </action>
+  <action name="actionEnd">
+   <property name="text">
+    <string>结束</string>
+   </property>
+  </action>
+  <action name="actionWrongWords">
+   <property name="text">
+    <string>错题本</string>
+   </property>
+  </action>
+  <action name="actionWordpad">
+   <property name="text">
+    <string>单词本</string>
+   </property>
+  </action>
+  <action name="actionClear">
+   <property name="text">
+    <string>清除错题记录</string>
+   </property>
+  </action>
+  <action name="actionExport">
+   <property name="text">
+    <string>导出错题</string>
+   </property>
+  </action>
+  <action name="actionDone">
+   <property name="text">
+    <string>导出已答</string>
+   </property>
+  </action>
+  <action name="actionCheck">
+   <property name="text">
+    <string>提交</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="text">
+    <string>删除选中</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>退出</string>
+   </property>
+  </action>
+  <action name="actionDoneWords">
+   <property name="text">
+    <string>已答本</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

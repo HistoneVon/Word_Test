@@ -1,2 +1,5 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/text">
+        <file alias="CET6">CET6.txt</file>
+    </qresource>
+</RCC>
