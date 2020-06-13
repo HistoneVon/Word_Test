@@ -17,6 +17,7 @@
 #include <QTableWidget>
 #include <QTabWidget>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include <QDebug>
 using namespace std;
 
@@ -484,12 +485,22 @@ void MainWindow::on_actionDoneWords_triggered()//已答本
 void MainWindow::on_actionClear_triggered()//清除错题记录（仅菜单栏有）
 {
     //提示不可恢复
-//    ui->tableWidget_2->clearContents();//清除内容
-    int row=ui->tableWidget_2->rowCount()-1;//行数比行号大1
-    while(row!=0)
+    QMessageBox::StandardButton choose;
+    choose=QMessageBox::question(this,"清除错题记录","清除后不可恢复，\n确定要清除吗？",
+                                 QMessageBox::Yes|QMessageBox::No);//消息框
+    if(choose==QMessageBox::Yes)
     {
-        row=ui->tableWidget_2->rowCount()-1;
-        ui->tableWidget_2->removeRow(row);
+        //ui->tableWidget_2->clearContents();//清除内容
+        int row=ui->tableWidget_2->rowCount()-1;//行数比行号大1
+        while(row!=0)
+        {
+            row=ui->tableWidget_2->rowCount()-1;
+            ui->tableWidget_2->removeRow(row);
+        }
+    }
+    else
+    {
+        ui->lineEdit->setText("放弃清除");
     }
 }
 
@@ -518,7 +529,7 @@ void MainWindow::on_actionImportDone_triggered()//导入已答本
     on_pushButton_importDone_clicked();
 }
 
-void MainWindow::on_actionAbout_triggered()
+void MainWindow::on_actionAbout_triggered()//关于
 {
     aboutDialog about;
     about.exec();
