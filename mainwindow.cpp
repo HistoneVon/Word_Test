@@ -130,9 +130,9 @@ void MainWindow::outputToChart(struct WORD temp,QTableWidget* tempWidget)
 {
     int rowCurrent=tempWidget->rowCount();//当前行
     tempWidget->insertRow(rowCurrent);
-    tempWidget->setItem(rowCurrent,0,new QTableWidgetItem(wordTemp.en));
-    tempWidget->setItem(rowCurrent,1,new QTableWidgetItem(wordTemp.zh));
-    if(temp.crct==0)//等于
+    tempWidget->setItem(rowCurrent,0,new QTableWidgetItem(temp.en));
+    tempWidget->setItem(rowCurrent,1,new QTableWidgetItem(temp.zh));
+    if(temp.crct==true)//等于
     {
         tempWidget->setItem(rowCurrent,2,new QTableWidgetItem("√"));
     }
@@ -147,9 +147,10 @@ void MainWindow::outputToChart(struct WORD temp,QTableWidget* tempWidget)
 void MainWindow::check()
 {
     wordTemp.ans=ui->lineEdit_2->text();//获取答案
-    wordTemp.crct=QString::compare(wordTemp.en,wordTemp.ans);//判断正误
+    wordTemp.crct=!(QString::compare(wordTemp.en,wordTemp.ans));//判断正误
+    //底层函数问题，compare相等为0，不等非0，故加!()
     outputToChart(wordTemp,ui->tableWidget_3);//向已答本写入
-    if(wordTemp.crct!=0)//错误时
+    if(wordTemp.crct==false)//错误时
     {
         outputToChart(wordTemp,ui->tableWidget_2);//向错题本写入
     }
@@ -203,7 +204,7 @@ void MainWindow::exportWord(QTableWidget* tempWidget,QString filename)
     QString sEN,sZH,sCRCT,sTIMES,str;//英文 中文 正误 答题次数 母串
 
     QFile f(filename);
-    if(f.open(QFile::WriteOnly|QFile::Append))//追加方式打开
+    if(f.open(QFile::WriteOnly|QFile::Append|QIODevice::Text))//追加方式打开
     {
         QTextStream out(&f);
         for(i=0;i<sumRow;++i)
@@ -241,6 +242,58 @@ void MainWindow::exportWord(QTableWidget* tempWidget,QString filename)
     else
     {
         ui->lineEdit->setText("文件无法创建");
+    }
+}
+
+//字符串处理函数
+void MainWindow::fileStringAnalyze(QString str, struct WORD& tempWord)
+{
+    int n1,n2,n3;
+    n1=str.indexOf("~",0);
+    n2=str.indexOf("~",n1+1);
+    n3=str.indexOf("~",n2+1);
+    tempWord.en=str.mid(0,n1);
+    tempWord.zh=str.mid(n1+1,n2-n1-1);
+    if(str.mid(n2+1,n3-n2-1)=="true")
+    {
+        tempWord.crct=true;
+    }
+    else
+    {
+        tempWord.crct=false;
+    }
+    qDebug()<<"1. "<<tempWord.en<<"  "<<tempWord.zh<<"  "<<tempWord.crct;
+}
+
+//打开已导出单词本
+void MainWindow::importWordDone(QTableWidget *tempWidget, QString filename)
+{
+    struct WORD tempWord;
+    QString tempStr;
+    QFile f(filename);
+    if(f.open(QFile::ReadOnly))
+    {
+        QTextStream tempLine(&f);
+        qDebug()<<"TEST: "<<f.atEnd();
+        while (!f.atEnd())
+        {
+            tempStr=tempLine.readLine();
+            qDebug()<<tempStr;
+            fileStringAnalyze(tempStr,tempWord);//字符串处理
+            outputToChart(tempWord,tempWidget);//向表格输出
+            qDebug()<<"2. "<<tempWord.en<<"  "<<tempWord.zh<<"  "<<tempWord.crct;
+            qDebug()<<f.atEnd()<<endl;
+//            if(f.atEnd())
+//            {
+//                break;
+//            }
+        }
+        f.close();
+        ui->lineEdit->setText("导入文件成功");
+    }
+    else
+    {
+        ui->lineEdit->setText("找不到文件");
     }
 }
 
@@ -297,7 +350,7 @@ void MainWindow::on_pushButton_export_2_clicked()
 
 void MainWindow::on_pushButton_export_1_clicked()
 {
-    exportWord(ui->tableWidget_2,"./Wordwrong.txt");
+    exportWord(ui->tableWidget_2,"./Wordswrong.txt");
     ui->lineEdit->setText("导出错题完成");
 }
 
@@ -396,4 +449,26 @@ void MainWindow::on_tableWidget_2_itemSelectionChanged()//错题本选中回显
 void MainWindow::on_tableWidget_3_itemSelectionChanged()//已答本选中回显
 {
     tableWidgetItemSelected(ui->tableWidget_3);
+}
+
+void MainWindow::on_pushButton_importWrong_clicked()//导入错题本
+{
+    importWordDone(ui->tableWidget_2,"./Wordswrong.txt");
+    ui->tabWidgetWordpad->setCurrentIndex(1);
+}
+
+void MainWindow::on_pushButton_importDone_clicked()//导入已答本
+{
+    importWordDone(ui->tableWidget_3,"./Wordsdone.txt");
+    ui->tabWidgetWordpad->setCurrentIndex(2);
+}
+
+void MainWindow::on_actionImportWrong_triggered()
+{
+    on_pushButton_importWrong_clicked();
+}
+
+void MainWindow::on_actionImportDone_triggered()
+{
+    on_pushButton_importDone_clicked();
 }

@@ -288,6 +288,20 @@
                  </property>
                 </widget>
                </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_importWrong">
+                 <property name="text">
+                  <string>打开错题</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_importDone">
+                 <property name="text">
+                  <string>打开已答</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item>
@@ -352,6 +366,8 @@
     <addaction name="actionDone"/>
     <addaction name="actionDelete"/>
     <addaction name="actionClear"/>
+    <addaction name="actionImportWrong"/>
+    <addaction name="actionImportDone"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_3"/>
@@ -389,9 +405,11 @@
    <addaction name="actionWrongWords"/>
    <addaction name="actionDoneWords"/>
    <addaction name="separator"/>
+   <addaction name="actionDelete"/>
    <addaction name="actionExport"/>
    <addaction name="actionDone"/>
-   <addaction name="actionDelete"/>
+   <addaction name="actionImportWrong"/>
+   <addaction name="actionImportDone"/>
   </widget>
   <action name="actionImport">
    <property name="text">
@@ -451,6 +469,16 @@
   <action name="actionDoneWords">
    <property name="text">
     <string>已答本</string>
+   </property>
+  </action>
+  <action name="actionImportWrong">
+   <property name="text">
+    <string>打开错题</string>
+   </property>
+  </action>
+  <action name="actionImportDone">
+   <property name="text">
+    <string>打开已答</string>
    </property>
   </action>
  </widget>
