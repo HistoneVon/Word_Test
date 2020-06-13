@@ -353,6 +353,7 @@
     <property name="title">
      <string>关于</string>
     </property>
+    <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -412,26 +413,46 @@
    <addaction name="actionImportDone"/>
   </widget>
   <action name="actionImport">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/import.ico</normaloff>:/icon/icon/import.ico</iconset>
+   </property>
    <property name="text">
     <string>导入文件</string>
    </property>
   </action>
   <action name="actionStart">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/start.ico</normaloff>:/icon/icon/start.ico</iconset>
+   </property>
    <property name="text">
     <string>开始</string>
    </property>
   </action>
   <action name="actionEnd">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/end.ico</normaloff>:/icon/icon/end.ico</iconset>
+   </property>
    <property name="text">
     <string>结束</string>
    </property>
   </action>
   <action name="actionWrongWords">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/padWrong.ico</normaloff>:/icon/icon/padWrong.ico</iconset>
+   </property>
    <property name="text">
     <string>错题本</string>
    </property>
   </action>
   <action name="actionWordpad">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/padAll.ico</normaloff>:/icon/icon/padAll.ico</iconset>
+   </property>
    <property name="text">
     <string>单词本</string>
    </property>
@@ -442,46 +463,89 @@
    </property>
   </action>
   <action name="actionExport">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/exportWrong.ico</normaloff>:/icon/icon/exportWrong.ico</iconset>
+   </property>
    <property name="text">
     <string>导出错题</string>
    </property>
   </action>
   <action name="actionDone">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/exportDone.ico</normaloff>:/icon/icon/exportDone.ico</iconset>
+   </property>
    <property name="text">
     <string>导出已答</string>
    </property>
   </action>
   <action name="actionCheck">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/submit.ico</normaloff>:/icon/icon/submit.ico</iconset>
+   </property>
    <property name="text">
     <string>提交</string>
    </property>
   </action>
   <action name="actionDelete">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/delete.ico</normaloff>:/icon/icon/delete.ico</iconset>
+   </property>
    <property name="text">
     <string>删除选中</string>
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/exit.ico</normaloff>:/icon/icon/exit.ico</iconset>
+   </property>
    <property name="text">
     <string>退出</string>
    </property>
   </action>
   <action name="actionDoneWords">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/padDone.ico</normaloff>:/icon/icon/padDone.ico</iconset>
+   </property>
    <property name="text">
     <string>已答本</string>
    </property>
   </action>
   <action name="actionImportWrong">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/importWrong.ico</normaloff>:/icon/icon/importWrong.ico</iconset>
+   </property>
    <property name="text">
     <string>打开错题</string>
    </property>
   </action>
   <action name="actionImportDone">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/importDone.ico</normaloff>:/icon/icon/importDone.ico</iconset>
+   </property>
    <property name="text">
     <string>打开已答</string>
    </property>
   </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icon/icon/about.ico</normaloff>:/icon/icon/about.ico</iconset>
+   </property>
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -33,7 +33,9 @@ public:
     void tableWidgetItemSelected(QTableWidget* tempWidget);//选中回显
     void check();//提交
     void handleChart(QTableWidget* tempWidget,int row,
-                     QString& s1,QString& s2,bool& s3,int& s4);//获取一行表格内容至字符串
+                     QString& s1,QString& s2,bool& s3,int& s4);//获取一行表格内容至字符串（暂时未写）
+    void handleChart(QTableWidget* tempWidget,int row,
+                     QString& s1,QString& s2,bool& s3);//获取表格（无次数）
     void handleChart(QTableWidget* tempWidget,int row,
                      QString& s1,QString& s2);//仅获取中英文（重载）
     void exportWord(QTableWidget* tempWidget,QString filename);//导出单词（通用）

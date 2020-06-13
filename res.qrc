@@ -2,4 +2,21 @@
     <qresource prefix="/text">
         <file alias="CET6">CET6.txt</file>
     </qresource>
+    <qresource prefix="/icon">
+        <file>icon/about.ico</file>
+        <file>icon/end.ico</file>
+        <file>icon/start.ico</file>
+        <file>icon/submit.ico</file>
+        <file>icon/exit.ico</file>
+        <file>icon/import.ico</file>
+        <file>icon/delete.ico</file>
+        <file>icon/exportDone.ico</file>
+        <file>icon/exportWrong.ico</file>
+        <file>icon/importDone.ico</file>
+        <file>icon/importSpare.ico</file>
+        <file>icon/importWrong.ico</file>
+        <file>icon/padWrong.ico</file>
+        <file>icon/padAll.ico</file>
+        <file>icon/padDone.ico</file>
+    </qresource>
 </RCC>

@@ -4,6 +4,7 @@
  * school:Harbin Institute of Technology at Weihai
  * grade:2019
  * student ID:2190400203
+ * name:冯昶霖
  */
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -79,6 +80,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionDelete->setEnabled(false);
     ui->actionExport->setEnabled(false);
     ui->actionDone->setEnabled(false);
+
+    //暂时隐藏，后续开发可用
+    ui->tableWidget_1->setColumnHidden(3,true);
+    ui->tableWidget_2->setColumnHidden(3,true);
+    ui->tableWidget_3->setColumnHidden(3,true);
 
     srand(time(NULL));
 
@@ -167,7 +173,7 @@ void MainWindow::check()
     //错题显示红色
 }
 
-//获取表格一行内容
+//获取表格一行内容（完整）
 void MainWindow::handleChart(QTableWidget* tempWidget,int row,
                              QString& s1,QString& s2,bool& s3,int& s4)
 {
@@ -181,7 +187,23 @@ void MainWindow::handleChart(QTableWidget* tempWidget,int row,
     {
         s3=false;
     }
-//    s4=tempWidget->item(row,3)->text().toInt();
+    s4=tempWidget->item(row,3)->text().toInt();
+}
+
+//获取表格一行内容（无次数）
+void MainWindow::handleChart(QTableWidget* tempWidget,int row,
+                             QString& s1,QString& s2,bool& s3)
+{
+    s1=tempWidget->item(row,0)->text();
+    s2=tempWidget->item(row,1)->text();
+    if(tempWidget->item(row,2)->text()=="√")
+    {
+        s3=true;
+    }
+    else
+    {
+        s3=false;
+    }
 }
 
 //仅获取中英文（重载）
@@ -313,6 +335,7 @@ void MainWindow::on_pushButton_start_clicked()//出题
     ui->pushButton_start->setText("下一题");
     ui->tabWidgetWordpad->setCurrentIndex(2);//设置活动标签页
     ui->lineEdit_2->setFocus();//将输入框设置为默认焦点
+    ui->lineEdit_2->clear();
     //出题并获取答案
     sumRow=ui->tableWidget_1->rowCount();//总行数
     rowTemp=rand()%sumRow;//随机行数
@@ -325,6 +348,8 @@ void MainWindow::on_pushButton_start_clicked()//出题
     ui->actionCheck->setEnabled(true);
     ui->actionExport->setEnabled(true);
     ui->actionDone->setEnabled(true);
+    ui->pushButton_importDone->setEnabled(false);
+    ui->pushButton_importWrong->setEnabled(false);
 }
 
 void MainWindow::on_pushButton_end_clicked()//结束
@@ -353,12 +378,14 @@ void MainWindow::on_pushButton_export_2_clicked()//导出已答
 {
     exportWord(ui->tableWidget_3,"./Wordsdone.txt");
     ui->lineEdit->setText("导出已答完成");
+    ui->pushButton_importDone->setEnabled(true);
 }
 
 void MainWindow::on_pushButton_export_1_clicked()//导出错题
 {
     exportWord(ui->tableWidget_2,"./Wordswrong.txt");
     ui->lineEdit->setText("导出错题完成");
+    ui->pushButton_importWrong->setEnabled(true);
 }
 
 void MainWindow::on_pushButton_delete_clicked()//删除
@@ -385,12 +412,14 @@ void MainWindow::on_pushButton_importWrong_clicked()//导入错题本
 {
     importWordDone(ui->tableWidget_2,"./Wordswrong.txt");
     ui->tabWidgetWordpad->setCurrentIndex(1);
+    ui->pushButton_importWrong->setEnabled(false);
 }
 
 void MainWindow::on_pushButton_importDone_clicked()//导入已答本
 {
     importWordDone(ui->tableWidget_3,"./Wordsdone.txt");
     ui->tabWidgetWordpad->setCurrentIndex(2);
+    ui->pushButton_importDone->setEnabled(false);
 }
 
 
@@ -450,10 +479,16 @@ void MainWindow::on_actionDoneWords_triggered()//已答本
     ui->tabWidgetWordpad->setCurrentIndex(2);
 }
 
-void MainWindow::on_actionClear_triggered()//清除错题记录
+void MainWindow::on_actionClear_triggered()//清除错题记录（仅菜单栏有）
 {
     //提示不可恢复
-    ui->tableWidget_2->clearContents();//清除内容
+//    ui->tableWidget_2->clearContents();//清除内容
+    int row=ui->tableWidget_2->rowCount()-1;//行数比行号大1
+    while(row!=0)
+    {
+        row=ui->tableWidget_2->rowCount()-1;
+        ui->tableWidget_2->removeRow(row);
+    }
 }
 
 void MainWindow::on_tableWidget_1_itemSelectionChanged()//单词本选中回显
