@@ -5,6 +5,7 @@
 #include <QTableWidget>
 #include <QObject>
 #include <string>
+#include "aboutdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -74,6 +75,7 @@ private slots:
     void on_pushButton_importDone_clicked();
     void on_actionImportWrong_triggered();
     void on_actionImportDone_triggered();
+    void on_actionAbout_triggered();
 };
 
 #endif // MAINWINDOW_H

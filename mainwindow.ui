@@ -387,6 +387,7 @@
    </attribute>
    <addaction name="actionImport"/>
    <addaction name="actionExit"/>
+   <addaction name="actionAbout"/>
    <addaction name="separator"/>
    <addaction name="actionStart"/>
    <addaction name="actionEnd"/>

@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/text">
         <file alias="CET6">CET6.txt</file>
+        <file alias="about">about.txt</file>
     </qresource>
     <qresource prefix="/icon">
         <file>icon/about.ico</file>
@@ -18,5 +19,6 @@
         <file>icon/padWrong.ico</file>
         <file>icon/padAll.ico</file>
         <file>icon/padDone.ico</file>
+        <file>icon/icon.ico</file>
     </qresource>
 </RCC>

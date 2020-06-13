@@ -517,3 +517,9 @@ void MainWindow::on_actionImportDone_triggered()//导入已答本
 {
     on_pushButton_importDone_clicked();
 }
+
+void MainWindow::on_actionAbout_triggered()
+{
+    aboutDialog about;
+    about.exec();
+}
