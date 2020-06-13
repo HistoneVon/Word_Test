@@ -350,6 +350,8 @@ void MainWindow::on_pushButton_start_clicked()//出题
     ui->actionDone->setEnabled(true);
     ui->pushButton_importDone->setEnabled(false);
     ui->pushButton_importWrong->setEnabled(false);
+    ui->actionImportDone->setEnabled(false);
+    ui->actionImportWrong->setEnabled(false);
 }
 
 void MainWindow::on_pushButton_end_clicked()//结束
