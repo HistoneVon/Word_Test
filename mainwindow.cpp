@@ -72,6 +72,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton_export_1->setEnabled(false);
     ui->pushButton_export_2->setEnabled(false);
 
+    //设置菜单栏工具栏初始状态
+    ui->actionStart->setEnabled(false);
+    ui->actionEnd->setEnabled(false);
+    ui->actionCheck->setEnabled(false);
+    ui->actionDelete->setEnabled(false);
+    ui->actionExport->setEnabled(false);
+    ui->actionDone->setEnabled(false);
+
     srand(time(NULL));
 
     QObject::connect(
@@ -103,7 +111,7 @@ void MainWindow::importWord()
             ui->tableWidget_1->insertRow(row);
             ui->tableWidget_1->setItem(row,0,new QTableWidgetItem(strEN));
             ui->tableWidget_1->setItem(row,1,new QTableWidgetItem(strZH));
-            if(f.atEnd())
+            if(str.atEnd())
             {
                 break;
             }
@@ -202,7 +210,6 @@ void MainWindow::exportWord(QTableWidget* tempWidget,QString filename)
     int sumRow=tempWidget->rowCount();
     int i;
     QString sEN,sZH,sCRCT,sTIMES,str;//英文 中文 正误 答题次数 母串
-
     QFile f(filename);
     if(f.open(QFile::WriteOnly|QFile::Append|QIODevice::Text))//追加方式打开
     {
@@ -262,7 +269,6 @@ void MainWindow::fileStringAnalyze(QString str, struct WORD& tempWord)
     {
         tempWord.crct=false;
     }
-    qDebug()<<"1. "<<tempWord.en<<"  "<<tempWord.zh<<"  "<<tempWord.crct;
 }
 
 //打开已导出单词本
@@ -274,19 +280,11 @@ void MainWindow::importWordDone(QTableWidget *tempWidget, QString filename)
     if(f.open(QFile::ReadOnly))
     {
         QTextStream tempLine(&f);
-        qDebug()<<"TEST: "<<f.atEnd();
-        while (!f.atEnd())
+        while (!tempLine.atEnd())
         {
             tempStr=tempLine.readLine();
-            qDebug()<<tempStr;
             fileStringAnalyze(tempStr,tempWord);//字符串处理
             outputToChart(tempWord,tempWidget);//向表格输出
-            qDebug()<<"2. "<<tempWord.en<<"  "<<tempWord.zh<<"  "<<tempWord.crct;
-            qDebug()<<f.atEnd()<<endl;
-//            if(f.atEnd())
-//            {
-//                break;
-//            }
         }
         f.close();
         ui->lineEdit->setText("导入文件成功");
@@ -297,15 +295,18 @@ void MainWindow::importWordDone(QTableWidget *tempWidget, QString filename)
     }
 }
 
-void MainWindow::on_pushButton_import_clicked()
+void MainWindow::on_pushButton_import_clicked()//导入文件
 {
     importWord();
     ui->pushButton_import->setEnabled(false);
     ui->pushButton_start->setEnabled(true);
     ui->pushButton_delete->setEnabled(true);
+    ui->actionImport->setEnabled(false);
+    ui->actionStart->setEnabled(true);
+    ui->actionDelete->setEnabled(true);
 }
 
-void MainWindow::on_pushButton_start_clicked()
+void MainWindow::on_pushButton_start_clicked()//出题
 {
     //判断是否导入(default)
     //设置样式
@@ -320,18 +321,24 @@ void MainWindow::on_pushButton_start_clicked()
     ui->pushButton_check->setEnabled(true);
     ui->pushButton_export_1->setEnabled(true);
     ui->pushButton_export_2->setEnabled(true);
+    ui->actionEnd->setEnabled(true);
+    ui->actionCheck->setEnabled(true);
+    ui->actionExport->setEnabled(true);
+    ui->actionDone->setEnabled(true);
 }
 
-void MainWindow::on_pushButton_end_clicked()
+void MainWindow::on_pushButton_end_clicked()//结束
 {
     ui->pushButton_start->setText("开始");
     ui->pushButton_end->setEnabled(false);
     ui->pushButton_check->setEnabled(false);
+    ui->actionEnd->setEnabled(false);
+    ui->actionCheck->setEnabled(false);
     ui->lineEdit->clear();
     ui->lineEdit_2->clear();
 }
 
-void MainWindow::on_pushButton_check_clicked()
+void MainWindow::on_pushButton_check_clicked()//提交
 {
     if(ui->pushButton_start->text()=="下一题")//即如果没有开始就不执行提交
     {
@@ -342,19 +349,19 @@ void MainWindow::on_pushButton_check_clicked()
     }
 }
 
-void MainWindow::on_pushButton_export_2_clicked()
+void MainWindow::on_pushButton_export_2_clicked()//导出已答
 {
     exportWord(ui->tableWidget_3,"./Wordsdone.txt");
     ui->lineEdit->setText("导出已答完成");
 }
 
-void MainWindow::on_pushButton_export_1_clicked()
+void MainWindow::on_pushButton_export_1_clicked()//导出错题
 {
     exportWord(ui->tableWidget_2,"./Wordswrong.txt");
     ui->lineEdit->setText("导出错题完成");
 }
 
-void MainWindow::on_pushButton_delete_clicked()
+void MainWindow::on_pushButton_delete_clicked()//删除
 {
     QTableWidget* tableWidgetTemp;
     int row;
@@ -373,6 +380,19 @@ void MainWindow::on_pushButton_delete_clicked()
     row=tableWidgetTemp->currentRow();
     tableWidgetTemp->removeRow(row);
 }
+
+void MainWindow::on_pushButton_importWrong_clicked()//导入错题本
+{
+    importWordDone(ui->tableWidget_2,"./Wordswrong.txt");
+    ui->tabWidgetWordpad->setCurrentIndex(1);
+}
+
+void MainWindow::on_pushButton_importDone_clicked()//导入已答本
+{
+    importWordDone(ui->tableWidget_3,"./Wordsdone.txt");
+    ui->tabWidgetWordpad->setCurrentIndex(2);
+}
+
 
 //菜单栏
 void MainWindow::on_actionImport_triggered()//导入文件
@@ -451,24 +471,12 @@ void MainWindow::on_tableWidget_3_itemSelectionChanged()//已答本选中回显
     tableWidgetItemSelected(ui->tableWidget_3);
 }
 
-void MainWindow::on_pushButton_importWrong_clicked()//导入错题本
-{
-    importWordDone(ui->tableWidget_2,"./Wordswrong.txt");
-    ui->tabWidgetWordpad->setCurrentIndex(1);
-}
-
-void MainWindow::on_pushButton_importDone_clicked()//导入已答本
-{
-    importWordDone(ui->tableWidget_3,"./Wordsdone.txt");
-    ui->tabWidgetWordpad->setCurrentIndex(2);
-}
-
-void MainWindow::on_actionImportWrong_triggered()
+void MainWindow::on_actionImportWrong_triggered()//导入错题本
 {
     on_pushButton_importWrong_clicked();
 }
 
-void MainWindow::on_actionImportDone_triggered()
+void MainWindow::on_actionImportDone_triggered()//导入已答本
 {
     on_pushButton_importDone_clicked();
 }
