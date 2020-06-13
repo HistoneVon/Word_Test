@@ -81,6 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionDelete->setEnabled(false);
     ui->actionExport->setEnabled(false);
     ui->actionDone->setEnabled(false);
+    ui->actionClear->setEnabled(false);
 
     //暂时隐藏，后续开发可用
     ui->tableWidget_1->setColumnHidden(3,true);
@@ -375,6 +376,7 @@ void MainWindow::on_pushButton_check_clicked()//提交
         rowTemp=rand()%sumRow;//随机行数
         startTest();//再次调用
     }
+    ui->actionClear->setEnabled(true);
 }
 
 void MainWindow::on_pushButton_export_2_clicked()//导出已答
@@ -416,6 +418,7 @@ void MainWindow::on_pushButton_importWrong_clicked()//导入错题本
     importWordDone(ui->tableWidget_2,"./Wordswrong.txt");
     ui->tabWidgetWordpad->setCurrentIndex(1);
     ui->pushButton_importWrong->setEnabled(false);
+    ui->actionClear->setEnabled(true);
 }
 
 void MainWindow::on_pushButton_importDone_clicked()//导入已答本
