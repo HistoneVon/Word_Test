@@ -189,7 +189,8 @@ void MainWindow::handleChart(QTableWidget* tempWidget,int row,
     {
         s3=false;
     }
-    s4=tempWidget->item(row,3)->text().toInt();
+//    s4=tempWidget->item(row,3)->text().toInt();
+    s4=1;
 }
 
 //获取表格一行内容（无次数）
