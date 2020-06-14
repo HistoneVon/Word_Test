@@ -384,14 +384,16 @@ void MainWindow::on_pushButton_export_2_clicked()//导出已答
 {
     exportWord(ui->tableWidget_3,"./Wordsdone.txt");
     ui->lineEdit->setText("导出已答完成");
-    ui->pushButton_importDone->setEnabled(true);
+    //ui->pushButton_importDone->setEnabled(true);
+    //导出后不再能够打开文件，后续维护可以重开窗口
 }
 
 void MainWindow::on_pushButton_export_1_clicked()//导出错题
 {
     exportWord(ui->tableWidget_2,"./Wordswrong.txt");
     ui->lineEdit->setText("导出错题完成");
-    ui->pushButton_importWrong->setEnabled(true);
+    //ui->pushButton_importWrong->setEnabled(true);
+    //导出后不再能够打开文件，后续维护可以重开窗口
 }
 
 void MainWindow::on_pushButton_delete_clicked()//删除
