@@ -4,6 +4,7 @@
 
 **开发环境**
 
+* C++ 11
 * Qt5
 * Qt Creator
 * Windows 10
