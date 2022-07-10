@@ -2,6 +2,12 @@
 
 > Author: fengclchn@outlook.com 冯昶霖 2190400203
 
+**开发环境**
+
+* Qt5
+* Qt Creator
+* Windows 10
+
 **本仓库包含**
 
 * 工程文件：根目录/
